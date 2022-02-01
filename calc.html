@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script>
+		function calc() {
+			var kwhPer100km;
+			var costPerKwh;
+			var electricalRange;
+
+			var litresPer100km;
+			var costPerlitre;
+			//var fuelRange;
+
+			//test1
+			kwhPer100km = 6.1;
+			costPerKwh = 0.39;
+			electricalRange = 30;
+			litresPer100km = 4.7;
+			costPerlitre = 1.66;
+
+			//test2
+			// kwhPer100km = 10.5;
+			// costPerKwh = 0.39;
+			// electricalRange = 30;
+			// litresPer100km = 4;
+			// costPerlitre = 1.66;
+
+			var electricalCostPer100km = kwhPer100km * costPerKwh;
+			var fuelCostPer100km = litresPer100km * costPerlitre;
+			var combinedCostPer100km = (electricalCostPer100km / 100 * electricalRange) + (fuelCostPer100km / 100 * (100 - electricalRange));
+
+			console.log(combinedCostPer100km);
+			// var txt = document.getElementById("fInput").value;
+			// var newtxt = "";
+
+			// for (var i = 0; i < txt.length; i++) {
+			// 	if (i % 2 == 1)
+			// 		newtxt += txt.charAt(i).toUpperCase();
+			// 	else
+			// 		newtxt += txt.charAt(i).toLowerCase();
+			// }
+
+			document.getElementById("fOutput").innerHTML = combinedCostPer100km + " €/100km";
+		}
+	</script>
+</head>
+
+<body>
+	<h2>RideCostCalc</h2>
+
+	<!-- <label for="fInput">Input:</label>
+	<input type="text" id="fInput" name="fInput"><br><br> -->
+
+	<button type="button" onclick="caseChange()">Calc</button>
+
+	<p id="fOutput"></p>
+
+</body>
+
+</html>
