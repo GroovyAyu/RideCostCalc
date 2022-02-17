@@ -2,46 +2,22 @@
 <html>
 
 <head>
+	<meta charset="utf-8" />
+	<meta name="GroovyAyu" content="RideCostCalc" />
+	<meta name="description" content="Calculate PHEV travel cost" />
+	<title>RideCostCalc</title>
+
+	<link rel="stylesheet" href="style.css">
+	<script src="calc.js"></script>
 	<script>
-		function calc() {
-			var kwhPer100km;
-			var costPerKwh;
-			var electricalRange;
+		function doIt()
+		{
+			var result = calc(document.getElementById("iElectricConsumption").value, document.getElementById("iElectricCost").value, document.getElementById("iElectricRange").value, document.getElementById("iFuelConsumption").value, document.getElementById("iFuelCost").value);
 
-			var litresPer100km;
-			var costPerlitre;
-			//var fuelRange;
-
-			//test1
-			kwhPer100km = 6.1;
-			costPerKwh = 0.39;
-			electricalRange = 30;
-			litresPer100km = 4.7;
-			costPerlitre = 1.66;
-
-			//test2
-			// kwhPer100km = 10.5;
-			// costPerKwh = 0.39;
-			// electricalRange = 30;
-			// litresPer100km = 4;
-			// costPerlitre = 1.66;
-
-			var electricalCostPer100km = kwhPer100km * costPerKwh;
-			var fuelCostPer100km = litresPer100km * costPerlitre;
-			var combinedCostPer100km = (electricalCostPer100km / 100 * electricalRange) + (fuelCostPer100km / 100 * (100 - electricalRange));
-
-			console.log(combinedCostPer100km);
-			// var txt = document.getElementById("fInput").value;
-			// var newtxt = "";
-
-			// for (var i = 0; i < txt.length; i++) {
-			// 	if (i % 2 == 1)
-			// 		newtxt += txt.charAt(i).toUpperCase();
-			// 	else
-			// 		newtxt += txt.charAt(i).toLowerCase();
-			// }
-
-			document.getElementById("fOutput").innerHTML = combinedCostPer100km + " €/100km";
+			if (!isNaN(result))
+			{
+				document.getElementById("fOutput").innerHTML = "Effective cost: " + result + " €/100km" /* + "<br>Travel cost: " + " €" */;
+			}
 		}
 	</script>
 </head>
@@ -49,10 +25,63 @@
 <body>
 	<h2>RideCostCalc</h2>
 
-	<!-- <label for="fInput">Input:</label>
-	<input type="text" id="fInput" name="fInput"><br><br> -->
+	<!-- <label for="iTotalDistance">Total distance: </label>
+	<input type="number" id="iTotalDistance" name="iTotalDistance">
+	<label for="iTotalDistance">km</label>
+	<br><br> -->
 
-	<button type="button" onclick="calc()">Calc</button>
+	<table style="width: 80%" border="1">
+		<tr>
+			<td style="width: 50%; text-align: center;">Electricity</td>
+			<td style="width: 50%; text-align: center;">Fuel</td>
+		</tr>
+		<!-- <tr>
+			<td style="width: 50%">
+				<label for="iElectricDistance">Distance part: </label>
+				<input type="number" id="iElectricDistance" name="iElectricDistance">
+				<label for="iElectricDistance">km</label>
+			</td>
+			<td style="width: 50%">
+				<label for="iFuelDistance">Distance part: </label>
+				<input type="number" id="iFuelDistance" name="iFuelDistance">
+				<label for="iFuelDistance">km</label>
+			</td>
+		</tr> -->
+		<tr>
+			<td style="width: 50%">
+				<label for="iElectricConsumption">Consumption: </label>
+				<input type="number" id="iElectricConsumption" name="iElectricConsumption">
+				<label for="iElectricConsumption">kWh/100km</label>
+			</td>
+			<td style="width: 50%">
+				<label for="iFuelConsumption">Consumption: </label>
+				<input type="number" id="iFuelConsumption" name="iFuelConsumption">
+				<label for="iFuelConsumption">l/100km</label>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 50%">
+				<label for="iElectricCost">Cost: </label>
+				<input type="number" id="iElectricCost" name="iElectricCost">
+				<label for="iElectricCost">€/kW</label>
+			</td>
+			<td style="width: 50%">
+				<label for="iFuelCost">Cost: </label>
+				<input type="number" id="iFuelCost" name="iFuelCost">
+				<label for="iFuelCost">€/l</label>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 50%">
+				<label for="iElectricRange">Pure range: </label>
+				<input type="number" id="iElectricRange" name="iElectricRange">
+				<label for="iElectricRange">km</label>
+			</td>
+		</tr>
+	</table>
+	<br>
+
+	<button type="button" id="calcButton" onclick="doIt()">Calc!</button>
 
 	<p id="fOutput"></p>
 
