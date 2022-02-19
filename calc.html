@@ -57,7 +57,9 @@
 
                 function fRgb() {
 
-                    document.body.style.background = `rgb(${fGetRandom()}, ${fGetRandom()}, ${fGetRandom()})`;
+                    window.requestAnimationFrame(function () {
+                        document.body.style.background = `rgb(${fGetRandom()}, ${fGetRandom()}, ${fGetRandom()})`;
+                    });
                 }
             })
 
