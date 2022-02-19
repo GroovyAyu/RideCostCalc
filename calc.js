@@ -1,4 +1,5 @@
-function costPer100(kwhPer100km, costPerKwh, electricalRange, litresPer100km, costPerlitre) {
+function costPer100(kwhPer100km, costPerKwh, electricalRange, litresPer100km, costPerlitre)
+{
     var electricalCostPer100km = GetCostPer100kmForEnergy(kwhPer100km, costPerKwh);
     var fuelCostPer100km = GetCostPer100kmForEnergy(litresPer100km, costPerlitre);
 
@@ -10,7 +11,8 @@ function costPer100(kwhPer100km, costPerKwh, electricalRange, litresPer100km, co
     return parseFloat(combinedCostPer100km).toFixed(4);
 }
 
-function totalCost(kwhPer100km, costPerKwh, litresPer100km, costPerlitre, distance) {
+function totalCost(kwhPer100km, costPerKwh, litresPer100km, costPerlitre, distance)
+{
     var electricalCostPer100km = GetCostPer100kmForEnergy(kwhPer100km, costPerKwh);
     var fuelCostPer100km = GetCostPer100kmForEnergy(litresPer100km, costPerlitre);
     var avg = (electricalCostPer100km + fuelCostPer100km) / 2;
@@ -22,7 +24,8 @@ function totalCost(kwhPer100km, costPerKwh, litresPer100km, costPerlitre, distan
     return parseFloat(costForDistance).toFixed(4);
 }
 
-function GetCostPer100kmForEnergy(energyUsedPer100, costPerEnergyUnit) {
+function GetCostPer100kmForEnergy(energyUsedPer100, costPerEnergyUnit)
+{
     return energyUsedPer100 * costPerEnergyUnit;
 }
 
