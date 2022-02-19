@@ -41,3 +41,11 @@ function GetCostPer100kmForEnergy(energyUsedPer100, costPerEnergyUnit) {
 // electricalRange = 30;
 // litresPer100km = 4;
 // costPerlitre = 1.66;
+
+// test3, erwartete Ergebnisse: 6,21 €/100km, 0,8592€
+// kwhPer100km = 10.9;
+// costPerKwh = 0.3;
+// electricalRange = 30;
+// litresPer100km = 4.5;
+// costPerlitre = 1.66;
+// distance = 16;
