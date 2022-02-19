@@ -2,102 +2,138 @@
 <html>
 
 <head>
-	<meta charset="utf-8" />
-	<meta name="GroovyAyu" content="RideCostCalc" />
-	<meta name="description" content="Calculate PHEV travel cost" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>RideCostCalc</title>
+    <meta charset="utf-8" />
+    <meta name="GroovyAyu" content="RideCostCalc" />
+    <meta name="description" content="Calculate PHEV travel cost" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RideCostCalc</title>
 
-	<link rel="stylesheet" href="style.css">
-	<script src="calc.js"></script>
-	<script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-		function doIt()
-		{
-			var resultPer100 = costPer100(document.getElementById("iElectricConsumption").value, document.getElementById("iElectricCost").value, document.getElementById("iElectricRange").value, document.getElementById("iFuelConsumption").value, document.getElementById("iFuelCost").value);
-			var resultForDistance = totalCost(document.getElementById("iElectricConsumption").value, document.getElementById("iElectricCost").value, document.getElementById("iFuelConsumption").value, document.getElementById("iFuelCost").value, document.getElementById("iTotalDistance").value);
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-			if (!isNaN(resultPer100))
-			{
-				document.getElementById("fOutputPer100").innerHTML = "Effective cost (with full battery): " + resultPer100 + " €/100km";
-				document.getElementById("fOutputPer100").hidden = false;
-			}
-			else
-			{
-				document.getElementById("fOutputPer100").hidden = true;
-			}
+    <link rel="stylesheet" href="style.css">
+    <script src="calc.js"></script>
+    <script>
 
-			if (!isNaN(resultForDistance))
-			{
-				document.getElementById("fOutputForDistance").innerHTML = "Average cost for given distance: " + resultForDistance + " €";
-				document.getElementById("fOutputForDistance").hidden = false;
-			}
-			else
-			{
-				document.getElementById("fOutputForDistance").hidden = true;
-			}
-		}
+        function doIt() {
+            var resultPer100 = costPer100(document.getElementById("iElectricConsumption").value, document.getElementById("iElectricCost").value, document.getElementById("iElectricRange").value, document.getElementById("iFuelConsumption").value, document.getElementById("iFuelCost").value);
+            var resultForDistance = totalCost(document.getElementById("iElectricConsumption").value, document.getElementById("iElectricCost").value, document.getElementById("iFuelConsumption").value, document.getElementById("iFuelCost").value, document.getElementById("iTotalDistance").value);
 
-	</script>
+            if (!isNaN(resultPer100)) {
+                document.getElementById("fOutputPer100").innerHTML = "Effective cost (with full battery): " + resultPer100 + " €/100km";
+                document.getElementById("fOutputPer100").hidden = false;
+            }
+            else {
+                document.getElementById("fOutputPer100").hidden = true;
+            }
+
+            if (!isNaN(resultForDistance)) {
+                document.getElementById("fOutputForDistance").innerHTML = "Average cost for given distance: " + resultForDistance + " €";
+                document.getElementById("fOutputForDistance").hidden = false;
+            }
+            else {
+                document.getElementById("fOutputForDistance").hidden = true;
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', (event) => {
+
+            window.addEventListener("keypress", function (pEvent) {
+
+
+
+                if ((String.fromCharCode(pEvent.charCode)) === "f") {
+
+                    fRgb();
+                }
+
+                function fGetRandom() {
+
+                    return Math.ceil(Math.random() * 255);
+                }
+
+                function fRgb() {
+
+                    document.body.style.background = `rgb(${fGetRandom()}, ${fGetRandom()}, ${fGetRandom()})`;
+                }
+            })
+
+
+
+        });
+
+
+    </script>
 </head>
 
 <body>
-	<h2>RideCostCalc</h2>
+    <div class="container">
+        <!-- Page Content goes here -->
+        <h2>RideCostCalc</h2>
 
-	<label for="iTotalDistance">Total distance: </label>
-	<input type="number" id="iTotalDistance" name="iTotalDistance">
-	<label for="iTotalDistance">km</label>
-	<br><br>
+        <label for="iTotalDistance">Total Distance: </label>
+        <input type="number" id="iTotalDistance" name="iTotalDistance">
+        <label for="iTotalDistance">km</label>
+        <br><br>
+        <br>
+        <div class="row">
+            <div class="col s12 m6">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">Electricity</span>
+                        <div class="input-field">
+                            <input type="number" id="iElectricConsumption" class="validate white-text">
+                            <label for="iElectricConsumption">Consumption</label>
+                            <span class="helper-text white-text" data-error="wrong">kWh/100km</span>
+                        </div>
+                        <div class="input-field">
+                            <input type="number" id="iElectricCost" class="validate white-text">
+                            <label for="iElectricCost">Cost</label>
+                            <span class="helper-text white-text" data-error="wrong">€/kW</span>
+                        </div>
+                        <div class="input-field">
+                            <input type="number" id="iElectricRange" class="validate white-text">
+                            <label for="iElectricRange">Pure range</label>
+                            <span class="helper-text white-text" data-error="wrong">km</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col s12 m6">
+                    <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                            <span class="card-title">Fuel</span>
+                            <div class="input-field">
+                                <input type="number" id="iFuelConsumption" class="validate white-text">
+                                <label for="iFuelConsumption">Consumption</label>
+                                <span class="helper-text white-text" data-error="wrong">l/100km</span>
+                            </div>
+                            <div class="input-field">
+                                <input type="number" id="iFuelCost" name="iFuelCost" class="validate white-text">
+                                <label for="iFuelCost">Cost</label>
+                                <span class="helper-text white-text" data-error="wrong">€/l</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-	<table style="width: 80%" border="1">
-		<tr>
-			<td style="width: 50%; text-align: center;">Electricity</td>
-			<td style="width: 50%; text-align: center;">Fuel</td>
-		</tr>
-		<tr>
-			<td style="width: 50%">
-				<label for="iElectricConsumption">Consumption: </label>
-				<input type="number" id="iElectricConsumption" name="iElectricConsumption">
-				<label for="iElectricConsumption">kWh/100km</label>
-			</td>
-			<td style="width: 50%">
-				<label for="iFuelConsumption">Consumption: </label>
-				<input type="number" id="iFuelConsumption" name="iFuelConsumption">
-				<label for="iFuelConsumption">l/100km</label>
-			</td>
-		</tr>
-		<tr>
-			<td style="width: 50%">
-				<label for="iElectricCost">Cost: </label>
-				<input type="number" id="iElectricCost" name="iElectricCost">
-				<label for="iElectricCost">€/kW</label>
-			</td>
-			<td style="width: 50%">
-				<label for="iFuelCost">Cost: </label>
-				<input type="number" id="iFuelCost" name="iFuelCost">
-				<label for="iFuelCost">€/l</label>
-			</td>
-		</tr>
-		<tr>
-			<td style="width: 50%">
-				<label for="iElectricRange">Pure range: </label>
-				<input type="number" id="iElectricRange" name="iElectricRange">
-				<label for="iElectricRange">km</label>
-			</td>
-		</tr>
-	</table>
-	<br>
+        <!-- <button type="button" id="calcButton" onclick="doIt()">Calc!</button> -->
+        <a class="waves-effect waves-light btn" onclick="doIt()">Calc!</a>
+        <p id="fOutputPer100"></p>
+        <p id="fOutputForDistance"></p>
 
-	<button type="button" id="calcButton" onclick="doIt()">Calc!</button>
-
-	<p id="fOutputPer100"></p>
-	<p id="fOutputForDistance"></p>
-
+    </div>
 </body>
 
 </html>
 
-		<!-- <tr>
+<!-- <tr>
 			<td style="width: 50%">
 				<label for="iElectricDistance">Distance part: </label>
 				<input type="number" id="iElectricDistance" name="iElectricDistance">
@@ -109,4 +145,3 @@
 				<label for="iFuelDistance">km</label>
 			</td>
 		</tr> -->
-		
