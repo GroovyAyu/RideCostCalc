@@ -5,48 +5,55 @@
 	<meta charset="utf-8" />
 	<meta name="GroovyAyu" content="RideCostCalc" />
 	<meta name="description" content="Calculate PHEV travel cost" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>RideCostCalc</title>
 
 	<link rel="stylesheet" href="style.css">
 	<script src="calc.js"></script>
 	<script>
+
 		function doIt()
 		{
-			var result = calc(document.getElementById("iElectricConsumption").value, document.getElementById("iElectricCost").value, document.getElementById("iElectricRange").value, document.getElementById("iFuelConsumption").value, document.getElementById("iFuelCost").value);
+			var resultPer100 = costPer100(document.getElementById("iElectricConsumption").value, document.getElementById("iElectricCost").value, document.getElementById("iElectricRange").value, document.getElementById("iFuelConsumption").value, document.getElementById("iFuelCost").value);
+			var resultForDistance = totalCost(document.getElementById("iElectricConsumption").value, document.getElementById("iElectricCost").value, document.getElementById("iFuelConsumption").value, document.getElementById("iFuelCost").value, document.getElementById("iTotalDistance").value);
 
-			if (!isNaN(result))
+			if (!isNaN(resultPer100))
 			{
-				document.getElementById("fOutput").innerHTML = "Effective cost: " + result + " €/100km" /* + "<br>Travel cost: " + " €" */;
+				document.getElementById("fOutputPer100").innerHTML = "Effective cost (with full battery): " + resultPer100 + " €/100km";
+				document.getElementById("fOutputPer100").hidden = false;
+			}
+			else
+			{
+				document.getElementById("fOutputPer100").hidden = true;
+			}
+
+			if (!isNaN(resultForDistance))
+			{
+				document.getElementById("fOutputForDistance").innerHTML = "Average cost for given distance: " + resultForDistance + " €";
+				document.getElementById("fOutputForDistance").hidden = false;
+			}
+			else
+			{
+				document.getElementById("fOutputForDistance").hidden = true;
 			}
 		}
+
 	</script>
 </head>
 
 <body>
 	<h2>RideCostCalc</h2>
 
-	<!-- <label for="iTotalDistance">Total distance: </label>
+	<label for="iTotalDistance">Total distance: </label>
 	<input type="number" id="iTotalDistance" name="iTotalDistance">
 	<label for="iTotalDistance">km</label>
-	<br><br> -->
+	<br><br>
 
 	<table style="width: 80%" border="1">
 		<tr>
 			<td style="width: 50%; text-align: center;">Electricity</td>
 			<td style="width: 50%; text-align: center;">Fuel</td>
 		</tr>
-		<!-- <tr>
-			<td style="width: 50%">
-				<label for="iElectricDistance">Distance part: </label>
-				<input type="number" id="iElectricDistance" name="iElectricDistance">
-				<label for="iElectricDistance">km</label>
-			</td>
-			<td style="width: 50%">
-				<label for="iFuelDistance">Distance part: </label>
-				<input type="number" id="iFuelDistance" name="iFuelDistance">
-				<label for="iFuelDistance">km</label>
-			</td>
-		</tr> -->
 		<tr>
 			<td style="width: 50%">
 				<label for="iElectricConsumption">Consumption: </label>
@@ -83,8 +90,23 @@
 
 	<button type="button" id="calcButton" onclick="doIt()">Calc!</button>
 
-	<p id="fOutput"></p>
+	<p id="fOutputPer100"></p>
+	<p id="fOutputForDistance"></p>
 
 </body>
 
 </html>
+
+		<!-- <tr>
+			<td style="width: 50%">
+				<label for="iElectricDistance">Distance part: </label>
+				<input type="number" id="iElectricDistance" name="iElectricDistance">
+				<label for="iElectricDistance">km</label>
+			</td>
+			<td style="width: 50%">
+				<label for="iFuelDistance">Distance part: </label>
+				<input type="number" id="iFuelDistance" name="iFuelDistance">
+				<label for="iFuelDistance">km</label>
+			</td>
+		</tr> -->
+		
