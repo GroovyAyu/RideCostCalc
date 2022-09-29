@@ -8,7 +8,7 @@ function costPer100(kwhPer100km, costPerKwh, electricalRange, litresPer100km, co
     // console.log("Calculated: " + combinedCostPer100km);
     // console.log("With toFixed(4): " + parseFloat(combinedCostPer100km).toFixed(4));
 
-    return parseFloat(combinedCostPer100km).toFixed(4);
+    return parseFloat(combinedCostPer100km).toFixed(2);
 }
 
 function totalCost(kwhPer100km, costPerKwh, litresPer100km, costPerlitre, distance)
@@ -21,7 +21,7 @@ function totalCost(kwhPer100km, costPerKwh, litresPer100km, costPerlitre, distan
     // console.log("Calculated: " + costForDistance);
     // console.log("With toFixed(4): " + parseFloat(costForDistance).toFixed(4));
 
-    return parseFloat(costForDistance).toFixed(4);
+    return parseFloat(costForDistance).toFixed(2);
 }
 
 function GetCostPer100kmForEnergy(energyUsedPer100, costPerEnergyUnit)
